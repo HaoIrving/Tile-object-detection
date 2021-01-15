@@ -11,5 +11,19 @@ tile_round1_train_20201231/
   ...
 ```
 
-大尺寸的框会被过滤掉，将对应于原图的标注记录下来备用
+修改`SplitOnlyImage.py`第232行
 
+运行命令`python SplitOnlyImage.py`
+
+运行之后的文件目录如下：
+```
+tile_round1_train_20201231/
+  coco_annotation/
+  train_imgs/
+  coco/
+    annotations/
+    train2017/
+    val2017/
+```
+
+大尺寸的框会被过滤掉，将对应于原图的标注记录下来备用，会被保存在coco_annotation文件夹
