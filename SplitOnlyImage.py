@@ -220,7 +220,7 @@ class splitbase():
     def splitdata(self, rate, iou_thresh):
         self.reset_json()
         
-        # self.image_indexes = [41]
+        self.image_indexes = [41]
         for index in self.image_indexes:
             self.SplitSingle(index, rate, self.ext, iou_thresh)
 
@@ -264,7 +264,6 @@ if __name__ == '__main__':
 
     image_id = split_train.image_id
     box_id = split_train.box_id
-    print('In train set, after spliting, total num of images: {}, boxes: {}'.format(image_id, box_id))    
     
     # 裁剪验证集
     split_val = splitbase(srcpath_img,
@@ -278,7 +277,9 @@ if __name__ == '__main__':
                             subsize=500)
     split_val.splitdata(1, iou_thresh)
 
-    image_id = split_val.image_id
-    box_id = split_val.box_id
-    print('In train and val set, after spliting, total num of images: {}, boxes: {}'.format(image_id, box_id))
+    losed_ann_train = len(split_train.losed_json_dict['annotations'])
+    losed_ann_val = len(split_val.losed_json_dict['annotations'])
+    print('In train set, after spliting, images: {}, boxes: {}, losed boxes: {}'.format(split_train.image_id, split_train.box_id, losed_ann_train))    
+    print('In val   set, after spliting, images: {}, boxes: {}, losed boxes: {}'.format(split_val.image_id, split_val.box_id, losed_ann_val))
+
 
