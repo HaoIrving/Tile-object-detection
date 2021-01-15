@@ -173,7 +173,7 @@ class splitbase():
                         xmin, ymin, xmax, ymax, category_id = int(bb[0]) - left, int(bb[1]) - up, int(bb[2]) - left, int(bb[3]) - up, int(bb[4])
                         # 将0.8 < iou < 1 的框的坐标限定在img patch内
                         if xmin < 0 or ymin < 0 or xmax > self.subsize or ymax > self.subsize:
-                            print('found a non restrict box: {}, refining it within the image patch.'.format([xmin, ymin, xmax, ymax]))
+                            print('found a non restrict box (x1, y1, x2, y2): {}, refining it within the image patch.'.format([xmin, ymin, xmax, ymax]))
                             xmin = max(xmin, 0)
                             ymin = max(ymin, 0)
                             xmax = min(xmax, self.subsize)
@@ -213,7 +213,7 @@ class splitbase():
                 losed_ann.pop('clean_bbox')
                 self.losed_json_dict['annotations'].append(losed_ann)
                 print('losed boxes shape:')
-                print('box: {}, category_id: {}'.format(losed_ann['bbox'], losed_ann['category_id']))
+                print('box (x, y, w, h): {}, category_id: {}'.format(losed_ann['bbox'], losed_ann['category_id']))
 
 
 
