@@ -148,7 +148,7 @@ class splitbase():
                 ious = iou(BBGT[:, : 4].astype('float32'), imgrect)
                 mask = ious >= iou_thresh
                 BBpatch = BBGT[mask]
-                restrict_filter = BBGT[ious == 1]  # sub image 中必须包含一个完整box
+                restrict_filter = BBGT[ious == 1]  # sub image 中必须包含一个完整box, 同时边缘被切割到的box，若和img patch的iou小于0.8，则舍弃这个box的标注
                 if len(BBpatch) > 0 and len(restrict_filter) > 0:
                     dummy_mask += mask
                     # print("before crop : %d" % len(BBGT))
