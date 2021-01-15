@@ -4,6 +4,14 @@ import cv2
 import copy
 from pycocotools.coco import COCO
 import json
+import argparse
+
+parser = argparse.ArgumentParser(
+    description='Split coco datasets')
+parser.add_argument('--root',
+                    default='/media/sun/DATA/tile_round1_train_20201231', type=str,
+                    help='dataset root path')
+args = parser.parse_args()
 
 def iou(BBGT, imgRect):
     """
@@ -234,7 +242,7 @@ class splitbase():
         self.__dict__.update(state)
 
 if __name__ == '__main__':
-    root = '/media/sun/DATA/tile_round1_train_20201231'  # change this line
+    root = args.root  # change this line
     srcpath_img       = os.path.join(root, 'train_imgs')
     srcpath_ann       = os.path.join(root, 'coco_annotation')
     coco_root         = os.path.join(root, 'coco')

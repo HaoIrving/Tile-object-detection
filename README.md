@@ -11,9 +11,9 @@ tile_round1_train_20201231/
   ...
 ```
 
-修改`SplitOnlyImage.py` [第240行](https://github.com/HaoIrving/Tile-object-detection/blob/1a55970c7ac895c0ed5a1e57192f3fd4591eb2d3/SplitOnlyImage.py#L240)
+运行命令`python SplitOnlyImage.py --root ${DATASET ROOT PATH}`
 
-运行命令`python SplitOnlyImage.py`
+将`${DATASET ROOT PATH}`替换为数据集的绝对路径
 
 运行之后的文件目录如下：
 ```
