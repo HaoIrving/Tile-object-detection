@@ -220,7 +220,7 @@ class splitbase():
     def splitdata(self, rate, iou_thresh):
         self.reset_json()
         
-        self.image_indexes = [41]
+        # self.image_indexes = [41]
         for index in self.image_indexes:
             self.SplitSingle(index, rate, self.ext, iou_thresh)
 
