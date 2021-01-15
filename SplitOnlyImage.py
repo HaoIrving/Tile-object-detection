@@ -2,9 +2,6 @@ import os
 import numpy as np
 import cv2
 import copy
-# import dota_utils as util
-from multiprocessing import Pool
-from functools import partial
 from pycocotools.coco import COCO
 import json
 
