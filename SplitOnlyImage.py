@@ -277,6 +277,6 @@ if __name__ == '__main__':
     losed_ann_train = len(split_train.losed_json_dict['annotations'])
     losed_ann_val = len(split_val.losed_json_dict['annotations'])
     print('In train set, after spliting, images: {}, boxes: {}, losed boxes: {}'.format(split_train.image_id, split_train.box_id, losed_ann_train))    
-    print('In val   set, after spliting, images: {}, boxes: {}, losed boxes: {}'.format(split_val.image_id, split_val.box_id, losed_ann_val))
+    print('In val   set, after spliting, images: {}, boxes: {}, losed boxes: {}'.format(split_val.image_id - split_train.image_id, split_val.box_id - split_train.box_id, losed_ann_val))
 
 
