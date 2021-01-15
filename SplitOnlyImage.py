@@ -148,7 +148,7 @@ class splitbase():
                 ious = iou(BBGT[:, : 4].astype('float32'), imgrect)
                 mask = ious >= iou_thresh
                 BBpatch = BBGT[mask]
-                restrict_filter = BBGT[ious == 1]  # sub image 中必须包含一个完整box, 同时边缘被切割到的box，若和img patch的iou小于0.8，则舍弃这个box的标注
+                restrict_filter = BBGT[ious == 1]  # sub image 中必须包含一个完整box, 同时边缘上被切割到的box，若和img patch的iou小于0.8，则舍弃这个box的标注
                 if len(BBpatch) > 0 and len(restrict_filter) > 0:
                     dummy_mask += mask
                     # print("before crop : %d" % len(BBGT))
@@ -171,6 +171,14 @@ class splitbase():
                     # calculate new box and save to self.json
                     for bb in BBpatch:
                         xmin, ymin, xmax, ymax, category_id = int(bb[0]) - left, int(bb[1]) - up, int(bb[2]) - left, int(bb[3]) - up, int(bb[4])
+                        # 将0.8 < iou < 1 的框的坐标限定在img patch内
+                        if xmin < 0 or ymin < 0 or xmax > self.subsize or ymax > self.subsize:
+                            print('found a non restrict box: {}, refining it within the image patch.'.format([xmin, ymin, xmax, ymax]))
+                            xmin = max(xmin, 0)
+                            ymin = max(ymin, 0)
+                            xmax = min(xmax, self.subsize)
+                            ymax = min(ymax, self.subsize)
+                        
                         o_width = xmax - xmin + 1
                         o_height = ymax - ymin + 1
                         box_id = self.box_id
